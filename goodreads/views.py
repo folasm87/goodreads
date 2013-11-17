@@ -62,16 +62,16 @@ def login():
     return goodreads.authorize(callback=url_for('oauth_authorized',
         next=request.args.get('next') or request.referrer or None)
 
+"""
 @app.route('/logout')
 def logout():
-    """User logout/authentication/session management."""
+    #User logout/authentication/session management.
     session.pop('logged_in', None)
     flash('You were logged out')
     return redirect(url_for('index'))
 
 
 
-'''
 if __name__ == '__main__':
     app.run() 
-'''
+"""
