@@ -1,8 +1,8 @@
 import xml.etree.ElementTree as ET
 from goodreads import app
 from rauth.service import OAuth1Service, OAuth1Session
-from flask import Flask, request, session, g, redirect, url_for, \
-     abort, render_template, flash, OAuth, session
+from flask_oauth import OAuth
+from flask import Flask, request, session, g, redirect, url_for, abort, render_template, flash, session
 
 CONSUMER_KEY = 'Q8edIjlM2xSSEECcTajYEg'
 CONSUMER_SECRET = 'kcbBGH6meXAh9BFJVbsjxjZnz2I6zg0kduhpIbRw'
@@ -60,18 +60,4 @@ def index():
 @app.route('/login')
 def login():
     return goodreads.authorize(callback=url_for('oauth_authorized',
-        next=request.args.get('next') or request.referrer or None)
-
-"""
-@app.route('/logout')
-def logout():
-    #User logout/authentication/session management.
-    session.pop('logged_in', None)
-    flash('You were logged out')
-    return redirect(url_for('index'))
-
-
-
-if __name__ == '__main__':
-    app.run() 
-"""
+        next=request.args.get('next') or request.referrer or None))
